@@ -1,0 +1,202 @@
+﻿@page
+@model RegisterModel
+
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                @if (User.IsInRole(SD.Role_Admin))
+                {
+                    <h2 class="py-2" text-dark>Register - ADMIN PORTAL</h2>
+                }
+                else
+                {
+                    <h2 class="py-2" text-dark>Register</h2>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row">
+            <div class="col-md-12">
+                <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <h4 class="text-center">Create a new account.</h3>
+                    <hr />
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="form-floating mb-3 col-md-12">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email" class="ms-2 text-muted">Email</label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3 col-md-6">
+                        <input asp-for="Input.FirstName" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Input.FirstName" class="ms-2 text-muted">Full Name</label>
+                            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3 col-md-6">
+                        <input asp-for="Input.LastName" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Input.LastName" class="ms-2 text-muted">Last Name</label>
+                            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.MiddleInitial" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Input.MiddleInitial" class="ms-2 text-muted">M.I</label>
+                            <span asp-validation-for="Input.MiddleInitial" class="text-danger"></span>
+                    </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                            <label asp-for="Input.Password" class="ms-2 text-muted">Password</label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                            <label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Confirm Password</label>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.StallName" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Input.StallName" class="ms-2 text-muted">Stall Name</label>
+                            <span asp-validation-for="Input.StallName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.StallNumber" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Input.StallNumber" class="ms-2 text-muted">Stall Number</label>
+                            <span asp-validation-for="Input.StallNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.StudentNumber" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Input.StudentNumber" class="ms-2 text-muted">Student Number</label>
+                            <span asp-validation-for="Input.StudentNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.CollegeDept" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Input.CollegeDept" class="ms-2 text-muted">College Department</label>
+                            <span asp-validation-for="Input.CollegeDept" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.Program" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Input.Program" class="ms-2 text-muted">Program</label>
+                            <span asp-validation-for="Input.Program" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.YearAndSection" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Input.YearAndSection" class="ms-2 text-muted">Year and Section</label>
+                            <span asp-validation-for="Input.YearAndSection" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.PhoneNumber" class="form-control" placeholder="name@example.com" />
+                            <label asp-for="Input.PhoneNumber" class="ms-2 text-muted">Phone Number</label>
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+                    
+                        @if (User.IsInRole(SD.Role_Admin))
+                        {
+
+                            <div class="form-floating mb-3 col-md-6">
+                                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                                    <option disabled selected>-Select Role-</option>
+                                </select>
+                            </div>
+                            <div class="form-floating mb-3 col-md-6">
+                                <select asp-for="Input.CompanyId" style="display:none" asp-items="@Model.Input.CompanyList" class="form-select">
+                                    <option disabled selected>-Select Company-</option>
+                                </select>
+                            </div>
+                        }
+                        <div class="col-12">
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                    </div>
+
+                </form>
+            </div>
+            @if (!User.IsInRole(SD.Role_Admin))
+            {
+                <div class="col-md-12 p-3 text-center">
+                <section>
+                    <p class="divider-text d-flex pt-3">or</p>
+                    @{
+                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                        {
+                                        <div>
+                                            <p>
+                                                There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                                    article
+                                                    about setting up this ASP.NET application to support logging in via external services
+                                                </a>.
+                                            </p>
+                                        </div>
+                        }
+                        else
+                        {
+                                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                            <div>
+                                                <p>
+                                                    @foreach (var provider in Model.ExternalLogins!)
+                                        {
+                                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                        }
+                                                </p>
+                                            </div>
+                                        </form>
+                        }
+                    }
+                </section>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function () {
+            // Function to update visibility based on the selected role
+            function updateVisibility() {
+                var selection = $('#Input_Role option:selected').text();
+                if (selection === 'Company') {
+                    // Hide company-related input labels
+                    $('#Input_CompanyId').show();
+                    $('#Input_StallNumber').closest('.form-floating').show();
+                    $('#Input_StallName').closest('.form-floating').show();
+
+                    // Show student-related input labels
+                    $('#Input_StudentNumber').closest('.form-floating').hide();
+                    $('#Input_CollegeDept').closest('.form-floating').hide();
+                    $('#Input_Program').closest('.form-floating').hide();
+                    $('#Input_YearAndSection').closest('.form-floating').hide();
+                }
+                else if (selection === 'Admin' || selection === 'Employee') {
+                    $('#Input_StudentNumber').closest('.form-floating').hide();
+                }
+                else {
+                    // Hide student-related input labels
+                    $('#Input_StudentNumber').closest('.form-floating').show();
+                    $('#Input_CollegeDept').closest('.form-floating').show();
+                    $('#Input_Program').closest('.form-floating').show();
+                    $('#Input_YearAndSection').closest('.form-floating').show();
+
+                    // Show company-related input labels
+                    $('#Input_CompanyId').hide();
+                    $('#Input_StallNumber').closest('.form-floating').hide();
+                    $('#Input_StallName').closest('.form-floating').hide();
+                }
+            }
+
+            // Trigger the change event to set the initial visibility
+            updateVisibility();
+
+            // Handle change event
+            $('#Input_Role').change(function () {
+                updateVisibility();
+            });
+        });
+    </script>
+}
+
+
+
+}
